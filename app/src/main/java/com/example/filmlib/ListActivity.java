@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -42,7 +43,11 @@ public class ListActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addInPublicStorage("Очень Классный/Не смотрел/324/Ну кайф чо.");
+                EditText name = (EditText)findViewById(R.id.Add_Name);
+                EditText status = (EditText)findViewById(R.id.Add_Status);
+                EditText rating = (EditText)findViewById(R.id.Add_Rating);
+                EditText description = (EditText)findViewById(R.id.Add_Description);
+                addInPublicStorage(name.getText().toString()+"/"+status.getText().toString()+"/"+rating.getText().toString()+"/"+description.getText().toString());
                 filmListAdapter.notifyDataSetChanged();
             }
         });
