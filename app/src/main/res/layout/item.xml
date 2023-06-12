@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Имя: "/>
+                android:text="Название: "/>
             <TextView
                 android:id="@+id/Item_name"
                 android:layout_width="wrap_content"
