@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,7 +18,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ListActivity extends AppCompatActivity {
-
+    private ListView filmList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,15 +26,11 @@ public class ListActivity extends AppCompatActivity {
         Button b1 = (Button) findViewById(R.id.Add_Item);
 
         //Создание ListVIew
-        ListView filmList = findViewById(R.id.list_of_films);
+        filmList = findViewById(R.id.list_of_films);
 
         //Создание списка фильмов, которые будут в приложении
-        Film[] films = {
-                new Film("Очень интересный фильм","Не просмотрено","0", "ну очень нойс фильм"),
-                new Film("Очень интересный фильм","Не просмотрено","0", "ну очень нойс фильм"),
-                new Film("Очень интересный фильм","Не просмотрено","0", "ну очень нойс фильм"),
-        };
-        //Объединение
+        Film[] films = {};
+        //Объединение имеющегося массива с общим хранилищем
         films = mergeArrays(films,readFromPublicStorage());
         //подключение адаптера
         FilmListAdapter filmListAdapter = new FilmListAdapter(this, films);
@@ -42,7 +39,11 @@ public class ListActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addInPublicStorage("Очень Классный/Не смотрел/324/Ну кайф чо.");
+                EditText name = (EditText)findViewById(R.id.Add_Name);
+                EditText status = (EditText)findViewById(R.id.Add_Status);
+                EditText rating = (EditText)findViewById(R.id.Add_Rating);
+                EditText description = (EditText)findViewById(R.id.Add_Description);
+                addInPublicStorage(name.getText().toString()+"/"+status.getText().toString()+"/"+rating.getText().toString()+"/"+description.getText().toString());
                 filmListAdapter.notifyDataSetChanged();
             }
         });
@@ -60,13 +61,9 @@ public class ListActivity extends AppCompatActivity {
                 writer.append("\n");
                 writer.flush();
                 writer.close();
-                Log.d("ListActivity", "Файл создан");
             } catch (IOException e) {
                 e.printStackTrace();
-                Log.d("ListActivity", "Файл не создан: " + e.getMessage());
             }
-        } else {
-            Log.d("ListActivity", "Внешнее хранилище недоступно");
         }
     }
 
@@ -74,7 +71,6 @@ public class ListActivity extends AppCompatActivity {
     public Film[] readFromPublicStorage() {
         Film[] films = {};
         File file = new File(getExternalFilesDir(null), "FilmDataFile.txt");
-        StringBuilder content = new StringBuilder();
 
         try {
             FileReader reader = new FileReader(file);

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListActivity">
+    tools:context=".ListActivity"
+    android:background="@drawable/background">
 
     <ListView
         android:id="@+id/list_of_films"
@@ -17,13 +18,66 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/Add_Item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Добавить новый фильм"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="410dp"
+        android:layout_height="147dp"
+        android:layout_marginTop="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_of_films" />
+        app:layout_constraintTop_toBottomOf="@+id/list_of_films">
+
+        <Button
+            android:id="@+id/Add_Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Добавить новый фильм"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="85dp"/>
+
+        <EditText
+            android:id="@+id/Add_Name"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Имя"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/white"/>
+
+        <EditText
+            android:id="@+id/Add_Status"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Состояние"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Add_Name"
+            android:background="@color/white"/>
+
+        <EditText
+            android:id="@+id/Add_Rating"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Рейтинг"
+            app:layout_constraintStart_toEndOf="@+id/Add_Name"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/white"/>
+
+        <EditText
+            android:id="@+id/Add_Description"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Описание"
+            app:layout_constraintStart_toEndOf="@+id/Add_Name"
+            app:layout_constraintTop_toBottomOf="@+id/Add_Rating"
+            android:background="@color/white"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
